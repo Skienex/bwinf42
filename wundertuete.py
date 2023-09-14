@@ -11,5 +11,3 @@ def get_url(url):
 
 wundertueten, game_number, games = get_url("https://bwinf.de/fileadmin/bundeswettbewerb/42/wundertuete0.txt")
 result = []
-
-for i in range(game_number): # Jedes spiel durchgehen
