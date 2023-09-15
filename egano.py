@@ -8,9 +8,7 @@ def rgb_of_pixel(x, y):
         'y': y,
         'r': r,
         'g': g,
-        'b': b,
-        'width': w,
-        'height': h
+        'b': b
     }
     return pixel
 
@@ -18,8 +16,8 @@ def next_pixel(pixel):
     next_x = pixel.get('x') + pixel.get('g')
     next_y = pixel.get('y') + pixel.get('b')
 
-    next_x = next_x % pixel.get('width')
-    next_y = next_y % pixel.get('height')
+    next_x = next_x % width
+    next_y = next_y % height
 
     return next_x, next_y
 
@@ -38,9 +36,11 @@ def extract_keyword():
 
     return word
 
-for i in range(6):
+for i in range(7):
     img_path = f"assets/bild0{i+1}.png"
     image = Image.open(img_path).convert('RGB')
+    width, height = image.size
+    
     print(f"Wort für Bild {i + 1} gefunden! Es ist: \n'{extract_keyword()}'")
     print("------------------------------------------")
     print("------------------------------------------")
