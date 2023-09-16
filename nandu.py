@@ -1,4 +1,5 @@
 from typing import Callable
+import requests
 
 CELL_EMPTY = 0  # X
 CELL_WHITE = 1  # W
@@ -120,6 +121,7 @@ class MatrixRow:
 
 
 def parse_matrix(src: str):
+    starts = 0
     lines = iter(src.splitlines(keepends=False))
     size = next(lines).split(' ')
     width = int(size[0])
@@ -133,6 +135,7 @@ def parse_matrix(src: str):
                 case 'Q':
                     index = int(cell_s[1:]) - 1
                     cell = Cell.input(index)
+                    starts += 1
                 case 'L':
                     index = int(cell_s[1:]) - 1
                     cell = Cell.output(index)
@@ -153,22 +156,23 @@ def parse_matrix(src: str):
             row.cells.append(cell)
         matrix.rows.append(row)
     matrix.connect()
-    return matrix
+    return matrix, starts
 
 
-source = """
-8 8
-X  X  Q1 Q2 Q3 Q4 X  X
-X  r  R  B  B  R  r  X
-X  X  W  W  W  W  X  X
-X  r  R  B  B  R  r  X
-r  R  W  W  B  B  R  r
-X  W  W  W  W  W  W  X
-X  X  B  B  X  X  X  X
-X  X  L1 L2 X  X  X  X
-""".strip()
-# X  X  X  X  X  X  X  X
-mat = parse_matrix(source)
-inputs = [1, 1, 1, 1]
-outputs = mat.process(inputs)
-print(outputs)
+def get_url(url):
+    return requests.get(url).text.strip()
+
+url = "https://bwinf.de/fileadmin/user_upload/nandu"
+
+for i in range(5):
+    print(f"\n\nDatei {i + 1}:")
+    source = get_url(f"{url}{i + 1}.txt")
+    print(source)
+    mat, starts = parse_matrix(source)
+    possible_starts = 2 ** starts
+    for j in range(possible_starts):
+        possible_start = bin(j)[2:].zfill(starts)
+        current_start = [int(char) for char in possible_start]
+        inputs = current_start
+        outputs = mat.process(inputs)
+        print(f"Input: {inputs} | Output: {outputs}")
