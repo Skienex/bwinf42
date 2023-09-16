@@ -12,9 +12,9 @@ def rgb_of_pixel(x, y):
     }
     return pixel
 
-def next_pixel(pixel):
-    next_x = pixel.get('x') + pixel.get('g')
-    next_y = pixel.get('y') + pixel.get('b')
+def next_pixel(current_pixel):
+    next_x = current_pixel.get('x') + current_pixel.get('g')
+    next_y = current_pixel.get('y') + current_pixel.get('b')
 
     next_x = next_x % width
     next_y = next_y % height
