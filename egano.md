@@ -1,22 +1,34 @@
 # St. Egano
+
 Dokumentation - Jonte
 
 ## Erklärung des Programmes
+
 `def rgb_of_pixel(x, y)` ist die Funktion, um die RGB Werte eines bestimmten Pixels zu bekommen.
 Dabei werden die Informationen des Pixels inerhalb eines Dictionarys gespeichert.
 
-Die Funktion `def next_pixel(pixel)` berechnet den nächsten Pixel nach dem aktuellen anhand des Grün- und Blauwertes. Hierbei wird beachtet, dass der offset sich immer auf dem Bild befinden muss. Dies mache ich mit dem Modulo Operator (%).
+Die Funktion `def next_pixel(pixel)` berechnet den nächsten Pixel nach dem aktuellen anhand des Grün- und Blauwertes.
+Hierbei wird beachtet, dass der offset sich immer auf dem Bild befinden muss. Dies mache ich mit dem Modulo
+Operator (%).
 
-Die Funktion `def extract_keyword()` 
+Die Funktion `def extract_keyword()` extrahiert das Keyword aus dem Bild. Dabei wird der erste Pixel des Bildes genommen
+und dann mit der Funktion `def next_pixel(pixel)` der nächste Pixel berechnet. Dies wird solange wiederholt, bis der
+End-Pixel erreicht ist. Der Rote Wert des Pixels wird dann in einen Buchstaben umgewandelt und an den String des
+Keywordes angehängt.
 
+Die Funktion `def extract_keyword()` wird dann 7 mal aufgerufen mithalb eines for-Loops. Dies wird deswegen gemacht,
+da es 7 Bilder gibt.
 
 ## Ergebnisse
-### 1.  Bild
+
+### 1. Bild
+
 ```txt
 Hallo Welt
 ```
 
-### 2.  Bild
+### 2. Bild
+
 ```txt
 Hallo Gloria
 
@@ -26,7 +38,8 @@ Alle Liebe,
 Juliane
 ```
 
-### 3.  Bild
+### 3. Bild
+
 ```txt
 Hallo Juliane,
 
@@ -36,19 +49,22 @@ Bis bald,
 Gloria
 ```
 
-### 4.  Bild
+### 4. Bild
+
 ```txt
 Der Jugendwettbewerb Informatik ist ein Programmierwettbewerb für alle, die erste Programmiererfahrungen sammeln und vertiefen möchten. Programmiert wird mit Blockly, einer Bausteinorientierten Programmiersprache. Vorkenntnisse sind nicht nötig. Um sich mit den Aufgaben des Wettbewerbs vertraut zu machen, empfehlen wir unsere Trainingsseite . Er richtet sich an Schülerinnen und Schüler der Jahrgangsstufen 5 - 13, prinzipiell ist aber eine Teilnahme ab Jahrgangsstufe 3 möglich. Der Wettbewerb besteht aus drei Runden. Die ersten beiden Runden erfolgen online. In der 3. Runde werden zwei Aufgaben gestellt, diese gilt es mit eigenen Programmierwerkzeugen zuhause zu bearbeiten.
 ```
 
-### 5.  Bild
+### 5. Bild
+
 ```txt
 Der Bundeswettbewerb Informatik richtet sich an Jugendliche bis 21 Jahre, vor dem Studium oder einer Berufstätigkeit. Der Wettbewerb beginnt am 1. September, dauert etwa ein Jahr und besteht aus drei Runden. Dabei können die Aufgaben der 1. Runde ohne größere Informatikkenntnisse gelöst werden; die Aufgaben der 2. Runde sind deutlich schwieriger.
 
 Der Bundeswettbewerb ist fachlich so anspruchsvoll, dass die Gewinner i.d.R. in die Studienstiftung des deutschen Volkes aufgenommen werden. Aus den Besten werden die TeilnehmerInnen für die Internationale Informatik-Olympiade ermittelt. Der Bundeswettbewerb ermöglicht den Teilnehmenden, ihr Wissen zu vertiefen und ihre Begabung weiterzuentwickeln. So trägt der Wettbewerb dazu bei, Jugendliche mit besonderem fachlichen Potenzial zu erkennen.
 ```
 
-### 6.  Bild
+### 6. Bild
+
 ```txt
 Bonn
 
@@ -762,6 +778,7 @@ Quelle: https://de.wikipedia.org/wiki/Bonn
 ```
 
 ### Bild 7
+
 ```txt
 Es hatte ein Mann einen Esel, der schon lange Jahre die Säcke unverdrossen zur Mühle getragen hatte, dessen Kräfte aber nun zu Ende giengen, so daß er zur Arbeit immer untauglicher ward. Da dachte der Herr daran, ihn aus dem Futter zu schaffen, aber der Esel merkte daß kein guter Wind wehte, lief fort und machte sich auf den Weg nach Bremen: dort, meinte er, könnte er ja Stadtmusikant werden. Als er ein Weilchen fortgegangen war, fand er einen Jagdhund auf dem Wege liegen, der jappte wie einer, der sich müde gelaufen hat. "Nun, was jappst du so, Packan?" fragte der Esel. "Ach," sagte der Hund, "weil ich alt bin und jeden Tag schwächer werde, auch auf der Jagd nicht mehr fort kann, hat mich mein Herr wollen todt schlagen, da hab ich Reißaus genommen; aber womit soll ich nun mein Brot verdienen?" "Weißt du was," sprach der Esel, "ich gehe nach Bremen und werde dort Stadtmusikant, geh mit und laß dich auch bei der Musik annehmen. Ich spiele die Laute, und du schlägst die Pauken." Der Hund wars zufrieden, und sie giengen weiter. Es dauerte nicht lange, so saß da eine Katze an dem Weg und machte ein Gesicht wie drei Tage Regenwetter. "Nun, was ist dir in die Quere gekommen, alter Bartputzer?" sprach der Esel. "Wer kann da lustig sein, wenns einem an den Kragen geht," antwortete die Katze, "weil ich nun zu Jahren komme, meine Zähne stumpf werden, und ich lieber hinter dem Ofen sitze und spinne, als nach Mäusen herum jage, hat mich meine Frau ersäufen wollen; ich habe mich zwar noch fortgemacht, aber nun ist guter Rath theuer: wo soll ich hin?" "Geh mit uns nach Bremen, du verstehst dich doch auf die Nachtmusik, da kannst du ein Stadtmusikant werden." Die Katze hielt das für gut und gieng mit. Darauf kamen die drei Landesflüchtigen an einem Hof vorbei, da saß auf dem Thor der Haushahn und schrie aus Leibeskräften. "Du schreist einem durch Mark und Bein," sprach der Esel, "was hast du vor?" "Da hab ich gut Wetter prophezeit," sprach der Hahn, "weil unserer lieben Frauen Tag ist, wo sie dem Christkindlein die Hemdchen gewaschen hat und sie trocknen will; aber weil Morgen zum Sonntag Gäste kommen, so hat die Hausfrau doch kein Erbarmen, und hat der Köchin gesagt sie wollte mich Morgen in der Suppe essen, und da soll ich mir heut Abend den Kopf abschneiden lassen. Nun schrei ich aus vollem Hals, so lang ich noch kann." "Ei was, du Rothkopf," sagte der Esel, "zieh lieber mit uns fort, wir gehen nach Bremen, etwas besseres als den Tod findest du überall; du hast eine gute Stimme, und wenn wir zusammen musicieren, so muß es eine Art haben." Der Hahn ließ sich den Vorschlag gefallen, und sie giengen alle viere zusammen fort.
 
