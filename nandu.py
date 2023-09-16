@@ -167,7 +167,6 @@ url = "https://bwinf.de/fileadmin/user_upload/nandu"
 for i in range(5):
     print(f"\n\nDatei {i + 1}:")
     source = get_url(f"{url}{i + 1}.txt")
-    print(source)
     mat, starts = parse_matrix(source)
     possible_starts = 2 ** starts
     for j in range(possible_starts):
