@@ -2,10 +2,12 @@
 
 ## Fertige Aufgaben:
 
-- egano.py
-- nandu.py
-- wundertuete.py
+- J1.py
+- J2.py
+- A4.py
 
 ## Fertige Dokumentationen
 
-- egano.md
+- J1.pdf
+- J2.pdf
+- A4.pdf
