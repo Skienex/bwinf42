@@ -168,6 +168,7 @@ for i in range(5):
     print(f"\n\nDatei {i + 1}:")
     source = get_url(f"{url}{i + 1}.txt")
     mat, starts = parse_matrix(source)
+    print(f"mat: {mat}, starts: {starts}")
     possible_starts = 2 ** starts
     for j in range(possible_starts):
         possible_start = bin(j)[2:].zfill(starts)
