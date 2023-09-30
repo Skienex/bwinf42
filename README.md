@@ -4,6 +4,8 @@
 
 - J1.py
 - J2.py
+- A1.py
+- A3.py (a-star)
 - A4.py
 
 ## Fertige Dokumentationen
