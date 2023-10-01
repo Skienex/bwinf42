@@ -1,3 +1,6 @@
 [submodule "a-star"]
 	path = a-star
 	url = https://github.com/sqyyy-jar/a-star
+[submodule "arukone"]
+	path = arukone
+	url = https://github.com/sqyyy-jar/arukone.git
