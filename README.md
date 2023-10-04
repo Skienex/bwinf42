@@ -4,7 +4,7 @@
 
 - J1.py
 - J2.py
-- A1.py
+- A1.py (arukone)
 - A3.py (a-star)
 - A4.py
 
