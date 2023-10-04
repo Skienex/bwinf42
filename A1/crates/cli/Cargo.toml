@@ -1,0 +1,12 @@
+[package]
+name = "cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+checker = { path = "../checker" }
+generator = { path = "../generator" }
+
+[[bin]]
+name = "arukone"
+path = "src/main.rs"

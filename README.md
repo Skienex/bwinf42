@@ -13,3 +13,7 @@
 - J1.pdf
 - J2.pdf
 - A4.pdf
+
+## WICHTIGE INFORMATIONEN
+A1 und A3 habe ich mit meinem Freund (sqyyy-jar) absolviert. Seine Repositorys sind als submodules verlinkt.
+Dieser Code ist zeitweise in diesem Repository verfügbar, bis ich eine Dokumentation dazu geschrieben habe.
