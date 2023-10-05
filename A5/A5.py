@@ -1,5 +1,5 @@
-def open_tour(num):
-    with open(f"tour{num}.txt", "r") as file:
+def open_tour(path):
+    with open(path, "r") as file:
         lines = file.readlines()
     return lines
 
@@ -17,11 +17,18 @@ def calculate(lines):
     essential_locations = [loc for loc in locations if loc["essential"]]
     essential_locations.sort(key=lambda loc: loc["year"])
 
-    return essential_locations
+    result = ""
 
-for i in range(1, 6):
-    lines = open_tour(i)
-    essential_locations = calculate(lines)
-    print(f"\n\ntour{i}.txt:")
     for loc in essential_locations:
-        print(f"{loc['name']} ({loc['year']})")
+        result += f"Name: {loc['name']}, Jahr: {loc['year']}, Entfernung: {loc['distance']}m\n"
+
+    return result
+
+
+if __name__ == '__main__':
+    for i in range(1, 6):
+        lines = open_tour(f"tour{i}.txt")
+        essential_locations = calculate(lines)
+        print(f"\n\ntour{i}.txt:")
+        for loc in essential_locations:
+            print(f"{loc['name']} ({loc['year']})")

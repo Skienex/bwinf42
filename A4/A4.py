@@ -1,5 +1,4 @@
 from typing import Callable
-import requests
 
 CELL_EMPTY = 0  # X
 CELL_WHITE = 1  # W
@@ -159,20 +158,37 @@ def parse_matrix(src: str):
     return matrix, starts
 
 
-def get_url(url):
-    return requests.get(url).text.strip()
+def get_file(path):
+    # Open file in path
+    with open(path, 'r') as file:
+        output = file.read().strip()
+    return output
 
-url = "https://bwinf.de/fileadmin/user_upload/nandu"
-
-for i in range(5):
-    print(f"\n\nDatei {i + 1}:")
-    source = get_url(f"{url}{i + 1}.txt")
+def calculate(file): # Only for Server
+    result = []
+    source = get_file(file)
     mat, starts = parse_matrix(source)
-    print(f"mat: {mat}, starts: {starts}")
     possible_starts = 2 ** starts
     for j in range(possible_starts):
         possible_start = bin(j)[2:].zfill(starts)
         current_start = [int(char) for char in possible_start]
         inputs = current_start
         outputs = mat.process(inputs)
-        print(f"Input: {inputs} | Output: {outputs}")
+        result.append([inputs, outputs])
+    return result
+
+
+if __name__ == '__main__':
+    for i in range(5):
+        result = []
+        print(f"\n\nDatei {i + 1}:")
+        source = get_file(f"nandu{i + 1}.txt")
+        mat, starts = parse_matrix(source)
+        print(f"mat: {mat}, starts: {starts}")
+        possible_starts = 2 ** starts
+        for j in range(possible_starts):
+            possible_start = bin(j)[2:].zfill(starts)
+            current_start = [int(char) for char in possible_start]
+            inputs = current_start
+            outputs = mat.process(inputs)
+            print(f"Input: {inputs} | Output: {outputs}")
