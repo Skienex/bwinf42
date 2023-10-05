@@ -1,6 +1,6 @@
-[submodule "a-star"]
-	path = a-star
-	url = https://github.com/sqyyy-jar/a-star
-[submodule "arukone"]
-	path = arukone
+[submodule "A1"]
+	path = A1
 	url = https://github.com/sqyyy-jar/arukone.git
+[submodule "A3"]
+	path = A3
+	url = https://github.com/sqyyy-jar/a-star.git
