@@ -1,0 +1,13 @@
+[package]
+name = "rust-server-glue"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rust_server_glue"
+
+[dependencies]
+pyo3 = "0.19.2"
+checker = { git = "https://github.com/sqyyy-jar/arukone.git" }
+generator = { git = "https://github.com/sqyyy-jar/arukone.git" }
+a-star = { git = "https://github.com/sqyyy-jar/a-star.git" }
