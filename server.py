@@ -40,8 +40,7 @@ class NeuralHTTP(BaseHTTPRequestHandler):
                 self.handle_stadtfuehrung(file)
             case "zauberschule":
                 self.handle_zauberschule(file)
-    
-    
+
     def handle_wundertuete(self, file: str):
         match file:
             case '0':
@@ -73,8 +72,7 @@ class NeuralHTTP(BaseHTTPRequestHandler):
                     wundertueten, max_games, games = wundertuete_cli.get_file(f"J1/wundertuete{i}.txt")
                     result = wundertuete_cli.verteile_games(wundertueten, max_games, games)
                     self.wfile.write(bytes(str(result), "utf-8"))
-        
-        
+
     def handle_egano(self, file: str):
         match file:
             case '0':
@@ -119,7 +117,6 @@ class NeuralHTTP(BaseHTTPRequestHandler):
                     print(egano_cli.extract_keyword(image, width, height))
                     self.wfile.write(bytes(egano_cli.extract_keyword(image, width, height), "utf-8"))
 
-
     def handle_nandu(self, file: str):
         match file:
             case '0':
@@ -137,7 +134,6 @@ class NeuralHTTP(BaseHTTPRequestHandler):
             case '4':
                 result = nandu_cli.calculate("A4/nandu5.txt")
                 self.wfile.write(bytes(str(result), "utf-8"))
-
 
     def handle_stadtfuehrung(self, file: str):
         match file:
@@ -161,7 +157,6 @@ class NeuralHTTP(BaseHTTPRequestHandler):
                 lines = stadtfuehrung_cli.open_tour("A5/tour5.txt")
                 essential_locations = stadtfuehrung_cli.calculate(lines)
                 self.wfile.write(bytes(essential_locations, "utf-8"))
-
 
     def handle_zauberschule(self, file: str):
         result = None
