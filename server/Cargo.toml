@@ -7,7 +7,7 @@ edition = "2021"
 name = "rust_server_glue"
 
 [dependencies]
-pyo3 = "0.19.2"
+pyo3 = { version = "0.19.2", features = ["extension-module"] }
 checker = { git = "https://github.com/sqyyy-jar/arukone.git" }
 generator = { git = "https://github.com/sqyyy-jar/arukone.git" }
 a-star = { git = "https://github.com/sqyyy-jar/a-star.git" }
