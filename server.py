@@ -78,43 +78,35 @@ class NeuralHTTP(BaseHTTPRequestHandler):
             case '0':
                 image = Image.open("J2/bild01.png").convert('RGB')
                 width, height = image.size
-                print(egano_cli.extract_keyword(image, width, height))
                 self.wfile.write(bytes(egano_cli.extract_keyword(image, width, height), "utf-8"))
             case '1':
                 image = Image.open("J2/bild02.png").convert('RGB')
                 width, height = image.size
-                print(egano_cli.extract_keyword(image, width, height))
                 self.wfile.write(bytes(egano_cli.extract_keyword(image, width, height), "utf-8"))
             case '2':
                 image = Image.open("J2/bild03.png").convert('RGB')
                 width, height = image.size
-                print(egano_cli.extract_keyword(image, width, height))
                 self.wfile.write(bytes(egano_cli.extract_keyword(image, width, height), "utf-8"))
             case '3':
                 image = Image.open("J2/bild04.png").convert('RGB')
                 width, height = image.size
-                print(egano_cli.extract_keyword(image, width, height))
                 self.wfile.write(bytes(egano_cli.extract_keyword(image, width, height), "utf-8"))
             case '4':
                 image = Image.open("J2/bild05.png").convert('RGB')
                 width, height = image.size
-                print(egano_cli.extract_keyword(image, width, height))
                 self.wfile.write(bytes(egano_cli.extract_keyword(image, width, height), "utf-8"))
             case '5':
                 image = Image.open("J2/bild06.png").convert('RGB')
                 width, height = image.size
-                print(egano_cli.extract_keyword(image, width, height))
                 self.wfile.write(bytes(egano_cli.extract_keyword(image, width, height), "utf-8"))
             case '6':
                 image = Image.open("J2/bild07.png").convert('RGB')
                 width, height = image.size
-                print(egano_cli.extract_keyword(image, width, height))
                 self.wfile.write(bytes(egano_cli.extract_keyword(image, width, height), "utf-8"))
             case _:
                 for i in range(7):
                     image = Image.open(f"J2/bild0{i + 1}.png").convert('RGB')
                     width, height = image.size
-                    print(egano_cli.extract_keyword(image, width, height))
                     self.wfile.write(bytes(egano_cli.extract_keyword(image, width, height), "utf-8"))
 
     def handle_nandu(self, file: str):
