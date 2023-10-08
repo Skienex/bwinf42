@@ -6,9 +6,7 @@ import J1.J1 as wundertuete_cli
 import J2.J2 as egano_cli
 import A4.A4 as nandu_cli
 import A5.A5 as stadtfuehrung_cli
-
 import json
-
 import rust_server_glue as rsg
 
 
@@ -26,7 +24,7 @@ class NeuralHTTP(BaseHTTPRequestHandler):
         query_components = parse_qs(parsed_url.query)
 
         program = query_components.get('program', [''])[0]
-        size = query_components.get('size', [''])[0]
+        size = query_components.get('size', ['0'])[0]
         file = query_components.get('file', [''])[0]
 
         match program:
@@ -40,6 +38,8 @@ class NeuralHTTP(BaseHTTPRequestHandler):
                 self.handle_stadtfuehrung(file)
             case "zauberschule":
                 self.handle_zauberschule(file)
+            case "arukone":
+                self.handle_arukone(size)
 
     def handle_wundertuete(self, file: str):
         match file:
@@ -180,6 +180,14 @@ class NeuralHTTP(BaseHTTPRequestHandler):
         # self.wfile.write(bytes(f"[{json.dumps(result.maze.cells)}, {json.dumps(result.path)}]", "utf-8"))
         self.wfile.write(bytes(json.dumps({"cells": result.maze.cells, "path": result.path}), "utf-8"))
 
+
+    def handle_arukone(self, size: str):
+        result = rsg.generate_arukone(int(size))
+        if result is None:
+            print("None-result!!!")
+            self.wfile.write(bytes("[]", "utf-8"))
+            return
+        self.wfile.write(bytes(json.dumps({"cells": result.cells, "num_count": result.num_count}), "utf-8"))
 
 def read_file(file: str) -> str:
     with open(file, "r") as f:

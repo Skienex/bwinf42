@@ -8,5 +8,7 @@ pub fn rust_server_glue(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<a_star_glue::PyMaze>()?;
     m.add_class::<a_star_glue::PySolution>()?;
     m.add_function(wrap_pyfunction!(a_star_glue::solve_maze, m)?)?;
+    m.add_class::<arukone_glue::PyGrid>()?;
+    m.add_function(wrap_pyfunction!(arukone_glue::generate_arukone, m)?)?;
     Ok(())
 }
