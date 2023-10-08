@@ -24,7 +24,7 @@ class NeuralHTTP(BaseHTTPRequestHandler):
         query_components = parse_qs(parsed_url.query)
 
         program = query_components.get('program', [''])[0]
-        size = query_components.get('size', ['0'])[0]
+        size = query_components.get('size', ['4'])[0]
         file = query_components.get('file', [''])[0]
 
         match program:
