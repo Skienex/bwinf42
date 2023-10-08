@@ -38,8 +38,15 @@ async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
     let start_time = Instant::now();
     let (grid_sender, grid_receiver) = mpsc::channel();
     let (output_sender, output_receiver) = mpsc::channel();
-    let handle = tokio::spawn(async { start_checker(grid_receiver, output_sender).await });
     let alive = Arc::new(AtomicBool::new(true));
+    let handle = {
+        let alive = alive.clone();
+        tokio::spawn(async move {
+            let result = start_checker(grid_receiver, output_sender).await;
+            alive.store(false, Ordering::Relaxed);
+            result
+        })
+    };
     let tokio_handle = Handle::current();
     let thread = {
         let alive = alive.clone();
@@ -61,7 +68,7 @@ async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
         })
     };
     let mut output = None;
-    loop {
+    while alive.load(Ordering::Relaxed) {
         if let Ok(output_grid) = output_receiver.try_recv() {
             output = Some(output_grid);
             _ = grid_sender.send(None);
