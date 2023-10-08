@@ -26,13 +26,15 @@ pub struct PyGrid {
 pub fn generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
     let Ok(rt) = tokio::runtime::Builder::new_multi_thread()
         .enable_all()
-        .build() else {
+        .build()
+    else {
         return Ok(None);
     };
     rt.block_on(async { async_generate_arukone(n).await })
 }
 
 async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
+    let n = n.max(4).min(30);
     let start_time = Instant::now();
     let (grid_sender, grid_receiver) = mpsc::channel();
     let (output_sender, output_receiver) = mpsc::channel();
@@ -51,6 +53,7 @@ async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
                     }
                     if let Err(err) = grid_sender.send(Some(grid)) {
                         println!("Error sending grid: {err}");
+                        break;
                     }
                     grid = Grid::new_random(n);
                 }
@@ -65,6 +68,7 @@ async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
             break;
         }
         if start_time.elapsed() >= Duration::from_secs(30) {
+            handle.abort();
             break;
         }
         spin_loop();
