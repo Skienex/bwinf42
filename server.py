@@ -25,6 +25,9 @@ class NeuralHTTP(BaseHTTPRequestHandler):
 
         program = query_components.get('program', [''])[0]
         size = query_components.get('size', ['4'])[0]
+        if not size.isdigit():
+            return
+        size = abs(int(size))
         file = query_components.get('file', [''])[0]
 
         match program:
@@ -173,12 +176,13 @@ class NeuralHTTP(BaseHTTPRequestHandler):
         self.wfile.write(bytes(json.dumps({"cells": result.maze.cells, "path": result.path}), "utf-8"))
 
 
-    def handle_arukone(self, size: str):
-        result = rsg.generate_arukone(int(size))
+    def handle_arukone(self, size: int):
+        result = rsg.generate_arukone(size)
         if result is None:
-            print("None-result!!!")
+            print("Result: None")
             self.wfile.write(bytes("[]", "utf-8"))
             return
+        print("Result: Some")
         self.wfile.write(bytes(json.dumps({"cells": result.cells, "num_count": result.num_count}), "utf-8"))
 
 def read_file(file: str) -> str:
