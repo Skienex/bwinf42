@@ -6,7 +6,7 @@ use generator::{CellType, Grid};
 use pyo3::prelude::*;
 use std::{
     hint::spin_loop,
-    process::Command,
+    process::{Command, Stdio},
     sync::{
         atomic::{AtomicBool, Ordering},
         mpsc, Arc,
@@ -25,7 +25,12 @@ pub struct PyGrid {
 
 #[pyfunction]
 pub fn generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
-    let Ok(mut driver) = Command::new("geckodriver").args(["-p", "9515"]).spawn() else {
+    let Ok(mut driver) = Command::new("geckodriver")
+        .args(["-p", "9515"])
+        .stdout(Stdio::null())
+        .stderr(Stdio::null())
+        .spawn()
+    else {
         println!("Failed to start driver");
         return Ok(None);
     };
