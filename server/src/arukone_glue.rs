@@ -72,8 +72,7 @@ async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
                     while alive.load(Ordering::Relaxed) && !grid.try_solve() {
                         grid = Grid::new_random(n);
                     }
-                    if let Err(err) = grid_sender.send(Some(grid)) {
-                        println!("Error sending grid: {err}");
+                    if grid_sender.send(Some(grid)).is_err() {
                         break;
                     }
                     grid = Grid::new_random(n);
