@@ -51,7 +51,7 @@ async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
     let handle = {
         let alive = alive.clone();
         tokio::spawn(async move {
-            let result = start_checker(grid_receiver, output_sender).await;
+            let result = start_checker(grid_receiver, output_sender, alive.clone()).await;
             alive.store(false, Ordering::Relaxed);
             result
         })
