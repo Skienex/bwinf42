@@ -31,7 +31,7 @@ pub fn generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
         .stderr(Stdio::null())
         .spawn()
     else {
-        println!("Failed to start driver");
+        eprintln!("Failed to start driver");
         return Ok(None);
     };
     let Ok(rt) = tokio::runtime::Builder::new_multi_thread()
@@ -42,7 +42,7 @@ pub fn generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
     };
     let result = rt.block_on(async { async_generate_arukone(n).await });
     if driver.kill().is_err() {
-        println!("Failed to kill driver");
+        eprintln!("Failed to kill driver");
     }
     result
 }
@@ -55,11 +55,7 @@ async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
     let alive = Arc::new(AtomicBool::new(true));
     let handle = {
         let alive = alive.clone();
-        tokio::spawn(async move {
-            let result = start_checker(grid_receiver, output_sender, alive.clone()).await;
-            alive.store(false, Ordering::Relaxed);
-            result
-        })
+        tokio::spawn(async move { start_checker(grid_receiver, output_sender, alive).await })
     };
     let tokio_handle = Handle::current();
     let thread = {
@@ -72,7 +68,8 @@ async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
                     while alive.load(Ordering::Relaxed) && !grid.try_solve() {
                         grid = Grid::new_random(n);
                     }
-                    if grid_sender.send(Some(grid)).is_err() {
+                    if grid_sender.send(grid).is_err() {
+                        alive.store(false, Ordering::Relaxed);
                         break;
                     }
                     grid = Grid::new_random(n);
@@ -80,26 +77,16 @@ async fn async_generate_arukone(n: usize) -> PyResult<Option<PyGrid>> {
             });
         })
     };
-    let mut output = None;
     while alive.load(Ordering::Relaxed) {
-        if let Ok(output_grid) = output_receiver.try_recv() {
-            output = Some(output_grid);
-            _ = grid_sender.send(None);
-            break;
-        }
         if start_time.elapsed() >= Duration::from_secs(30) {
-            handle.abort();
+            alive.store(false, Ordering::Relaxed);
             break;
         }
         spin_loop();
     }
-    alive.store(false, Ordering::Relaxed);
-    if thread.join().is_err() {
-        return Ok(None);
-    }
-    if handle.await.is_err() {
-        return Ok(None);
-    }
+    _ = thread.join();
+    _ = handle.await;
+    let output = output_receiver.recv_timeout(Duration::from_secs(1)).ok();
     Ok(output.map(convert_grid))
 }
 
