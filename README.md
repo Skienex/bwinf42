@@ -7,12 +7,18 @@
 - A1.py (arukone)
 - A3.py (a-star)
 - A4.py
+- A5.py
 
 ## Fertige Dokumentationen
 
 - J1.pdf
 - J2.pdf
 - A4.pdf
+
+## In Progress
+
+- A1.docx
+- A3.docx
 
 ## WICHTIGE INFORMATIONEN
 A1 und A3 habe ich mit meinem Freund (sqyyy-jar) absolviert. Seine Repositorys sind als submodules verlinkt.
